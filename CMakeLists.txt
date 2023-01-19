@@ -11,6 +11,7 @@ add_executable(opencvtest main.cpp)
 
 target_link_libraries( opencvtest ${OpenCV_LIBS} )
 
+set(OpenCV_DIR /home/pauls/opencv/4.7.0/opencv-4.7.0-aocc-build-ipp-tbb-eigen-openmp)
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
