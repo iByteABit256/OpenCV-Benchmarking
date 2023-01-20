@@ -13,6 +13,14 @@ COUNTER=0
 # Aggragated time
 TOTAL_TIME=0
 
+# Compile example
+rm -rf build/*
+cmake -S . -B build/
+cd build
+cmake --build .
+cd ..
+
+# Benchmark
 while [ $COUNTER -lt $SAMPLE_SIZE ]; do
 	# Execution time
 	TIME=$(./build/opencvtest | cut -d [ -f 2 | cut -d ] -f 1)
