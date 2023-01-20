@@ -35,7 +35,7 @@ def update_cmake(build):
         for line in lines:
             if 'OpenCV_DIR' in line:
                 curr_build = line.strip().split('OpenCV_DIR ')[1].replace(')', '')
-                print(f'Current build: {curr_build}\nReplacing with {new_build}\n')
+                print(f'\nCurrent build: {curr_build}\nReplacing with: {new_build}\n')
 
     with open(cmake_config, 'w') as f:
         for line in lines:
@@ -44,18 +44,19 @@ def update_cmake(build):
 
 """
 
- For every openCV build, update the CMakeLists.txt file,
+ For every openCV build, install it, update the CMakeLists.txt file,
  recompile the example, run the benchmark, and save the results to a csv file.
 
 """
 def main():
     opencv_builds = get_opencv_builds()
-    num_of_executions = 1 if len(sys.argv) == 1 else sys.argv[1]
+    num_of_executions = 15 if len(sys.argv) == 1 else sys.argv[1]
     benchmark_results = []
 
     for build in opencv_builds:
+        subprocess.run(['./install-build.sh', opencv_root_dir + build], check=True)
         update_cmake(build)
-        out = subprocess.run(['./benchmark.sh', num_of_executions], check=True, capture_output=True)# %s' % num_of_executions)
+        out = subprocess.run(['./benchmark.sh', num_of_executions], check=True, capture_output=True)
         avg_execution_micros = get_avg_execution_micros(out.stdout.decode('utf-8'))
         benchmark_results.append({'Build': build, 'Average execution time (μs)': avg_execution_micros})
         print(f'Build {build} took an average of {avg_execution_micros} μs for {num_of_executions} executions\n')
