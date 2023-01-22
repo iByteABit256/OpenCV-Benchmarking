@@ -4,8 +4,7 @@ project(opencvtest VERSION 0.1.0)
 include(CTest)
 enable_testing()
 
-set(OpenCV_DIR /home/pauls/opencv/4.7.0/opencv-4.7.0-build-ipp-tbb-eigen-openmp)
-find_package( OpenCV REQUIRED )
+find_package( OpenCV REQUIRED PATHS /home/pauls/opencv/4.7.0/opencv-4.7.0-build-ipp-tbb-eigen-openmp)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
 add_executable(opencvtest main.cpp)

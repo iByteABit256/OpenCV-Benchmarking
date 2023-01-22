@@ -33,8 +33,8 @@ def update_cmake(build):
     with open(cmake_config, 'r') as f:
         lines = f.readlines()
         for line in lines:
-            if 'OpenCV_DIR' in line:
-                curr_build = line.strip().split('OpenCV_DIR ')[1].replace(')', '')
+            if 'REQUIRED PATHS' in line:
+                curr_build = line.strip().split('REQUIRED PATHS ')[1].replace(')', '')
                 print(f'\nCurrent build: {curr_build}\nReplacing with: {new_build}\n')
 
     with open(cmake_config, 'w') as f:
