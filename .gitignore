@@ -1,1 +1,3 @@
 build/**
+.ipynb_checkpoints/**
+benchmark-results/.ipynb_checkpoints/**
